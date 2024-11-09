@@ -1,0 +1,331 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Poppins:wght@400;700&display=swap");
+/* reset */
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+body {
+  /* 3. Add accessible line-height */
+  line-height: 1.5;
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 7. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/*
+    9. Create a root stacking context
+  */
+#root,
+#__next {
+  isolation: isolate;
+}
+/* end reset */
+
+/* main */
+:root {
+  color-scheme: light;
+  /*  */
+  --Bright-Blue: hsl(220, 98%, 61%);
+  --Check-Background: linear-gradient(
+    to right,
+    hsl(192, 100%, 67%),
+    hsl(280, 87%, 65%)
+  );
+  /* linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%); */
+  /* light */
+  --Very-Light-Gray: hsl(0, 0%, 98%);
+  --Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
+  --Light-Grayish-Blue: hsl(233, 11%, 84%);
+  --Dark-Grayish-Blue: hsl(236, 9%, 61%);
+  --Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
+  /* dark */
+  --Very-Dark-Blue: hsl(235, 21%, 11%);
+  --Very-Dark-Unsaturated-Blue: hsl(235, 24%, 19%);
+  --Light-Grayish-Blue: hsl(234, 39%, 85%);
+  --Light-Grayish-Blue-hover: hsl(236, 33%, 92%);
+  --Dark-Grayish-Blue: hsl(234, 11%, 52%);
+  --Very-Dark-Grayish-Blue-1: hsl(233, 14%, 35%);
+  --Very-Dark-Grayish-Blue: hsl(237, 14%, 26%);
+  transition: all 300ms ease 0.1s;
+}
+
+html.dark-theme {
+  color-scheme: dark;
+}
+html.dark-theme {
+  transition: all 300ms ease;
+
+  > body {
+    background-image: url("images/bg-desktop-dark.jpg");
+
+    @media (max-width: 375px) {
+      background-image: url("images/bg-mobile-dark.jpg");
+    }
+    > main {
+      > .theme-control {
+        > button {
+          background-image: url("images/icon-sun.svg");
+        }
+      }
+    }
+  }
+}
+
+body {
+  font-family: "Josefin Sans", serif;
+  display: grid;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-image: url("images/bg-desktop-light.jpg");
+  background-repeat: no-repeat;
+  background-position-y: top;
+  background-position-x: initial;
+  place-content: center;
+  align-content: start;
+  transition: all 300ms ease;
+
+  background-color: light-dark(var(--Very-Light-Gray), var(--Very-Dark-Blue));
+
+  @media (max-width: 375px) {
+    background-image: url(images/bg-mobile-light.jpg);
+  }
+}
+
+main {
+  margin-block-start: 3em;
+  width: min(500px, 90vw);
+  display: grid;
+  > *:not(:last-child) {
+    margin-block-start: 1.5em;
+  }
+  > :nth-last-child(-n + 2) {
+    box-shadow: 0px 0px 20px 1px light-dark(rgb(192, 191, 191), rgb(36, 21, 71));
+  }
+  > section {
+    border-radius: 0.5em;
+  }
+  > .theme-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    > p {
+      font-size: 2.2em;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--Very-Light-Gray);
+    }
+    > button {
+      width: 35px;
+      aspect-ratio: 1;
+      background-image: url(images/icon-moon.svg);
+      background-repeat: no-repeat;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      background-position: center;
+      transition: all 300ms ease;
+    }
+  }
+
+  > .input-container {
+    background-color: light-dark(
+      var(--Very-Light-Gray),
+      var(--Very-Dark-Unsaturated-Blue)
+    );
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    gap: 1em;
+    > input[type="text"] {
+      border: none;
+      width: 100%;
+      outline: none;
+      padding: 0.5em;
+      background-color: light-dark(
+        var(--Very-Light-Gray),
+        var(--Very-Dark-Unsaturated-Blue)
+      );
+    }
+  }
+
+  > .todos-controls {
+    padding: 1em;
+    background-color: light-dark(
+      var(--Very-Light-Gray),
+      var(--Very-Dark-Unsaturated-Blue)
+    );
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    display: flex;
+    justify-content: space-around;
+    > a {
+      text-decoration: none;
+      color: var(--Dark-Grayish-Blue);
+      font-weight: 600;
+    }
+    > .remain-items {
+      color: var(--Dark-Grayish-Blue);
+      font-weight: 400;
+
+      > span {
+        margin-inline-end: 0.5em;
+      }
+    }
+    > .controls a {
+      text-decoration: none;
+      color: var(--Dark-Grayish-Blue);
+      font-weight: 600;
+    }
+    > .controls a.active {
+      color: var(--Bright-Blue);
+    }
+  }
+  > .todos {
+    display: flex;
+    flex-direction: column;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: light-dark(
+      var(--Very-Light-Gray),
+      var(--Very-Dark-Unsaturated-Blue)
+    );
+    > .todo-item {
+      display: grid;
+      grid-template-columns: 0.1fr 1fr 0.2fr;
+      padding: 1em;
+      align-items: center;
+      border-bottom: 1px solid var(--Very-Light-Grayish-Blue);
+      transition: all 0.2s ease-in-out;
+
+      > .todo-text {
+        color: light-dark(
+          var(--Very-Dark-Unsaturated-Blue),
+          var(--Light-Grayish-Blue)
+        );
+        margin-inline-start: 0.5em;
+      }
+      > button {
+        border: none;
+        background-color: transparent;
+        background-image: url(images/icon-cross.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+        width: 35px;
+        aspect-ratio: 1;
+        justify-self: end;
+      }
+    }
+    > .todo-item.dragging {
+      background-color: #f0f0f0; /* Light background */
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+      transform: scale(1.05); /* Slightly enlarge */
+    }
+    > .todo-item.drop-target {
+      border: 2px dashed #007bff; /* Dashed border for drop area */
+      padding: 10px;
+    }
+  }
+}
+
+/* checkbox */
+.checkbox-container {
+  display: grid;
+  position: relative;
+  cursor: pointer;
+  > input[type="checkbox"] {
+    display: none;
+  }
+  > .checkmark {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border-radius: 50%; /* Makes it a circle */
+    position: relative;
+    display: inline-block;
+    border: solid 1px var(--Very-Light-Grayish-Blue);
+    transition: background-color 0.3s;
+  }
+  > .checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+    background-color: var(--Check-Background); /* Color for checked state */
+    top: 4px;
+    left: 7px;
+    width: 5px;
+    height: 10px;
+    border: solid 1px var(--Very-Light-Grayish-Blue);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  > input[type="checkbox"]:checked + .checkmark {
+    background-image: var(--Check-Background);
+  }
+  > input[type="checkbox"]:checked + .checkmark::after {
+    display: block;
+  }
+}
+
+.active {
+  color: var(--Bright-Blue);
+}
+
+@media (max-width: 760px) {
+  main {
+    > * {
+      margin-block-start: 1.5em;
+    }
+  }
+}
